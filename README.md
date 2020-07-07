@@ -11,4 +11,10 @@ android app using **JSON** File format.
  6.0 RecyclerView
  7.0 Android Permissions
  
+ ## AsycTask 
+ Allows you to run tasks on background. uses three parameters
+    *Params
+    *Progress 
+    *Results
+  To execute a method you can asycTaskMethod.**execute();** method on it
      
