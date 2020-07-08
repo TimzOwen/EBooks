@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ebooks</string>
+    <string name="erro_loading_ata">Error Loading your Data check connection</string>
 </resources>
