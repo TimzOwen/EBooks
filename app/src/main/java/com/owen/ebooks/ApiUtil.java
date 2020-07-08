@@ -20,8 +20,7 @@ public class ApiUtil {
 
     //create a URL builder function
     public static URL buildURL(String title){
-        String fullUrlbuilder = BASE_API_URL + "?=" + title;
-
+        String fullUrlbuilder = BASE_API_URL + "?q=" + title;
         URL url = null;
         try
         {
@@ -40,9 +39,11 @@ public class ApiUtil {
         HttpURLConnection connection = (HttpURLConnection)  url.openConnection();
         try
         {
-            //create a scanner object and inputStream for conversion
+            //create a scanner object and inputStream for conversion and read string files
             InputStream inputStream = connection.getInputStream();
             Scanner scanner = new Scanner(inputStream);
+            //read everything using delimeter
+            scanner.useDelimiter("\\A");
 
             //check if the scanner has data by creating a boolean for it.
             boolean hasData = scanner.hasNext();
