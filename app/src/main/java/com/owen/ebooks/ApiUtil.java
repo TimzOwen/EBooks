@@ -100,9 +100,10 @@ public class ApiUtil {
         final String PUBLISHER = "publisher";
         final String PUBLISHED_DATE = "publishedDate";
         final String ITEMS = "items";
+        final String VOLUMEINFO = "volumeInfo";
 
         //generate array list of books and start at 0;
-        ArrayList<Books> books = null;
+        ArrayList<Books> books = new ArrayList<Books>();
 
         //use try catch to pass in hte json files
         try
@@ -117,6 +118,25 @@ public class ApiUtil {
             for (int i=0; i<numOfBooks;i++)
             {
                 //create another json array
+                JSONObject booksJSON = arrayBooks.getJSONObject(i);
+                JSONObject volumeInfoJSON = booksJSON.getJSONObject(VOLUMEINFO);
+                //get the number of authors
+                int authorsNumber = volumeInfoJSON.getJSONArray(AUTHORS).length();
+                //create Srting s to store the number of authors
+                String [] authors = new String[authorsNumber];
+                //get the json authors names and pass them to the string value
+                for (int j=0; j<authorsNumber; j++)
+                {
+                    authors[j] = volumeInfoJSON.getJSONArray(AUTHORS).get(j).toString();
+                }
+                //create a new book to fetch the data needed from all the books
+                Books books1 = new Books(booksJSON.getString(ID),
+                        volumeInfoJSON.getString(TITLE),
+                        (volumeInfoJSON.isNull(SUBTITLE)?"":volumeInfoJSON.getString(SUBTITLE)),
+                        authors,
+                        volumeInfoJSON.getString(PUBLISHER),
+                        volumeInfoJSON.getString(PUBLISHED_DATE));
+                books.add(books1);
             }
         }
         catch (JSONException e)
