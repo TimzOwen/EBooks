@@ -3,6 +3,10 @@ package com.owen.ebooks;
 import android.net.Uri;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ApiUtil {
@@ -83,5 +88,42 @@ public class ApiUtil {
         }
 
 
+    }
+    //method to get jsonData from the web
+    public static ArrayList<Books> getBooksFromJson(String json)
+    {
+        //create the constant to hold the books description
+        final String ID = "id";
+        final String TITLE = "title";
+        final String SUBTITLE = "subtitle";
+        final String AUTHORS = "authors";
+        final String PUBLISHER = "publisher";
+        final String PUBLISHED_DATE = "publishedDate";
+        final String ITEMS = "items";
+
+        //generate array list of books and start at 0;
+        ArrayList<Books> books = null;
+
+        //use try catch to pass in hte json files
+        try
+        {
+            //create JSON object from the string;
+            JSONObject jsonBooks = new JSONObject(json);
+            //get arrays with all the books
+            JSONArray arrayBooks = jsonBooks.getJSONArray(ITEMS);
+            //calculate the numbers of successful retrieved books
+            int numOfBooks = arrayBooks.length();
+            //loop through and get the titles requirements
+            for (int i=0; i<numOfBooks;i++)
+            {
+                //create another json array
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return books;
     }
 }
